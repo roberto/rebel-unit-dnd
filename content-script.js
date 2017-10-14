@@ -2,6 +2,10 @@ var convert = function (value) {
   return Qty(value.replace(/\.$/, '')).toBase().toPrec(0.5)
 }
 
+document.querySelectorAll('span.No-Break').forEach(function (element) {
+  element.outerHTML = element.innerHTML
+})
+
 findAndReplaceDOMText(document.body, {
   find: /(\d+) ((?:to|by|and|to over) \d+ (pounds|lb\.|feet|foot|ft\.))/g,
   replace: function (portion, match) {
