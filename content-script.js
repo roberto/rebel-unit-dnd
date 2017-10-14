@@ -3,9 +3,9 @@ var feetToMeters = function (feet) {
 }
 
 findAndReplaceDOMText(document.body, {
-  find: /(\d+) (feet|foot|ft)/g,
+  find: /(\d+) (feet|foot|ft\.)/g,
   replace: function (portion) {
-    var converted = feetToMeters(portion.text)
+    var converted = feetToMeters(portion.text.replace(/\.$/, ''))
 
     return portion.text + ' (' + converted + ')'
   }
