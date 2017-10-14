@@ -9,6 +9,7 @@
     {
       "matches": ["https://*.dndbeyond.com/*"],
       "js": [
+        "libs/quantities.js",
         "libs/findAndReplaceDOMText.js",
         "content-script.js"
       ],
