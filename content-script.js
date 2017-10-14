@@ -1,23 +1,23 @@
-var feetToMeters = function (value) {
-  return Qty(value.replace(/\.$/, '')).to('m').toPrec('0.5 m')
+var convert = function (value) {
+  return Qty(value.replace(/\.$/, '')).toBase().toPrec(0.5)
 }
 
 findAndReplaceDOMText(document.body, {
-  find: /(\d+) ((?:to|by|and) \d+ (feet|foot|ft\.))/g,
+  find: /(\d+) ((?:to|by|and) \d+ (pounds|lb\.|feet|foot|ft\.))/g,
   replace: function (portion, match) {
     var firstValue = match[1]
     var secondPart = match[2]
     var unit = match[3]
-    var converted = feetToMeters(firstValue + unit)
+    var converted = convert(firstValue + unit)
 
     return firstValue + ' (' + converted + ') ' + secondPart
   }
 })
 
 findAndReplaceDOMText(document.body, {
-  find: /(\d+) (feet|foot|ft\.)/g,
+  find: /(\d+) (pounds|lb\.|feet|foot|ft\.)/g,
   replace: function (portion) {
-    var converted = feetToMeters(portion.text)
+    var converted = convert(portion.text)
 
     return portion.text + ' (' + converted + ')'
   }
@@ -26,7 +26,7 @@ findAndReplaceDOMText(document.body, {
 findAndReplaceDOMText(document.body, {
   find: /(\d+)‐(foot)-wide/g,
   replace: function (portion, match) {
-    var converted = feetToMeters(match[1] + match[2])
+    var converted = convert(match[1] + match[2])
 
     return portion.text + ' (' + converted + ')'
   }
