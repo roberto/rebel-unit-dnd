@@ -1,8 +1,8 @@
-findAndReplaceDOMText(document.getElementById('content'), {
+findAndReplaceDOMText(document.body, {
   find: /(\d+) (feet|foot|ft)/g,
-  replace: function (node) {
-    var converted = Qty(node.text).to('m')
+  replace: function (portion) {
+    var converted = Qty(portion.text).to('m').toPrec('0.5 m')
 
-    return node.text + ' (' + converted + ')'
+    return portion.text + ' (' + converted + ')'
   }
 })
