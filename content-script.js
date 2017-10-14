@@ -3,7 +3,7 @@ var convert = function (value) {
 }
 
 findAndReplaceDOMText(document.body, {
-  find: /(\d+) ((?:to|by|and) \d+ (pounds|lb\.|feet|foot|ft\.))/g,
+  find: /(\d+) ((?:to|by|and|to over) \d+ (pounds|lb\.|feet|foot|ft\.))/g,
   replace: function (portion, match) {
     var firstValue = match[1]
     var secondPart = match[2]
