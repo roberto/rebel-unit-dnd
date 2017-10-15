@@ -1,5 +1,9 @@
 var convert = function (value) {
-  return Qty(value.replace(/\.$/, '')).toBase().toPrec(0.5)
+  var sanitized = value
+    .replace(/\.$/, '')
+    .replace(/½/, '.5')
+
+  return Qty(sanitized).toBase().toPrec(0.5)
 }
 
 document.querySelectorAll('span.No-Break').forEach(function (element) {
@@ -7,7 +11,7 @@ document.querySelectorAll('span.No-Break').forEach(function (element) {
 })
 
 findAndReplaceDOMText(document.body, {
-  find: /(\d+) ((?:to|by|and|to over) \d+ (pounds|lb\.|feet|foot|ft\.))/g,
+  find: /(\d+½?) ((?:to|by|and|to over) \d+½? (pounds|lb\.|feet|foot|ft\.))/g,
   replace: function (portion, match) {
     var firstValue = match[1]
     var secondPart = match[2]
@@ -19,7 +23,7 @@ findAndReplaceDOMText(document.body, {
 })
 
 findAndReplaceDOMText(document.body, {
-  find: /(\d+) (pounds|lb\.|feet|foot|ft\.)/g,
+  find: /(\d+½?) (pounds|lb\.|feet|foot|ft\.)/g,
   replace: function (portion) {
     var converted = convert(portion.text)
 
@@ -28,7 +32,7 @@ findAndReplaceDOMText(document.body, {
 })
 
 findAndReplaceDOMText(document.body, {
-  find: /(\d+)‐(foot)-wide/g,
+  find: /(\d+½?)‐(foot)-wide/g,
   replace: function (portion, match) {
     var converted = convert(match[1] + match[2])
 
