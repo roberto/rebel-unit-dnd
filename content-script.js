@@ -32,11 +32,10 @@ findAndReplaceDOMText(document.body, {
 })
 
 findAndReplaceDOMText(document.body, {
-  find: /(\d+½?)‐(foot)-wide/g,
+  find: /(\d+½?)\-(foot)(\-(wide|square))?/g,
   replace: function (portion, match) {
     var converted = convert(match[1] + match[2])
 
     return portion.text + ' (' + converted + ')'
   }
 })
-
